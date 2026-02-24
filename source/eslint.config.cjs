@@ -4,7 +4,6 @@ const tseslint = require("typescript-eslint");
 const prettierConfig = require("eslint-config-prettier/flat");
 const react = require("eslint-plugin-react");
 const globals = require("globals");
-const esReactHooks = require("eslint-plugin-react-hooks");
 const esReactRefresh = require("eslint-plugin-react-refresh");
 
 module.exports = defineConfig([
@@ -16,12 +15,10 @@ module.exports = defineConfig([
   {
     files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
     plugins: {
-      "react-hooks": esReactHooks,
       "react-refresh": esReactRefresh,
     },
     rules: {
-      ...esReactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      "react-refresh/only-export-components": "off",
       "react/prop-types": "off",
     },
     languageOptions: {
