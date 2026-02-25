@@ -20,6 +20,9 @@
       "@ui": [
         "./shared/ui"
       ],
+      "@storages": [
+        "./shared/storages"
+      ],
     }
   },
   "include": [
