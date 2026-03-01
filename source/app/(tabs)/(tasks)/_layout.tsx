@@ -17,8 +17,11 @@ const TasksLayout = () => {
       <Stack.Screen
         name="create"
         options={{
-          presentation: "pageSheet",
-          title: "Новая задача",
+          headerTransparent: true,
+          headerBlurEffect: "none",
+          title: t("tabs.createTask"),
+          presentation: "formSheet",
+          sheetAllowedDetents: [0.6, 1],
         }}
       />
       <Stack.Screen
@@ -26,7 +29,7 @@ const TasksLayout = () => {
         options={{
           headerTransparent: true,
           headerBlurEffect: "none",
-          headerTitle: t("tabs.tasks"),
+          headerBackButtonDisplayMode: "minimal",
         }}
       />
     </Stack>

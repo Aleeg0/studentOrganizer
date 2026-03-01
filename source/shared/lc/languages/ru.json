@@ -1,12 +1,16 @@
 {
   "tabs": {
     "tasks": "Задачи",
+    "taskReadonly": "Просмотр задачи",
+    "task": "Редактирование задачи",
+    "createTask": "Новая задача",
     "schedule": "Расписание",
     "settings": "Настройки"
   },
   "groupsScreen": {
     "navTitle": "Все группы",
-    "courseTitle": "Курс"
+    "courseTitle": "Курс",
+    "searchPlaceholder": "Найти группу"
   },
   "scheduleScreen": {
     "menu": {
@@ -24,12 +28,24 @@
     "english": "Английский",
     "russian": "Русский"
   },
-  "days": {
-    "monday": "Понедельник",
-    "tuesday": "Вторник",
-    "wednesday": "Среда",
-    "thursday": "Четверг",
-    "friday": "Пятница",
-    "saturday": "Суббота"
+  "createTaskScreen": {
+    "baseInfo": {
+      "title": "Основная информация",
+      "namePlaceholder": "Новая задача",
+      "descriptionPlaceholder": "Описание"
+    },
+    "deadlineTitle": "Дедлайн",
+    "dataTitle": "Дата",
+    "dateToday": "Сегодня",
+    "dateTomorrow": "Завтра"
+  },
+  "taskScreen": {
+    "deleteBtnCaption": "Удалить",
+    "deleteAlert": {
+      "submitBtnCaption": "Подтвердить",
+      "cancelBtnCaption": "Отменить",
+      "title": "Удаление задачи",
+      "description": "Вы уверены, что хотите удалить данную задачу?"
+    }
   }
 }

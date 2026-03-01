@@ -6,9 +6,9 @@ export type TaskSubject = {
 };
 
 export type Task = {
-  id: number;
+  id: string;
   name: string;
   description: string;
-  subject: TaskSubject;
-  deadLine: string;
+  //subject: TaskSubject;
+  deadline: string | null;
 };

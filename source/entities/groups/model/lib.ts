@@ -18,15 +18,19 @@ export const getBeautifulDescription = ({
   return `${facultyAbbrev} ${MIDDLE_DOT} ${specialityAbbrev} ${MIDDLE_DOT} ${courseTitle} ${course}`;
 };
 
-export const groupBySpecializationDigits = (
-  groups: StudentGroup[]
-): GroupedStudentGroups => {
-  return groups.reduce<GroupedStudentGroups>((acc, group) => {
-    const firstThree = group.name.slice(0, 3);
-    if (!acc[firstThree]) {
-      acc[firstThree] = [];
+export const groupBySpecializationDigits = (groups: StudentGroup[]) => {
+  const result: GroupedStudentGroups = {};
+
+  for (const group of groups) {
+    const prefix =
+      group.name.length >= 3 ? group.name.substring(0, 3) : "Other";
+
+    if (!result[prefix]) {
+      result[prefix] = [];
     }
-    acc[firstThree].push(group);
-    return acc;
-  }, {});
+
+    result[prefix].push(group);
+  }
+
+  return result;
 };

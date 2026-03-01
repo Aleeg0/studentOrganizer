@@ -1,73 +1,59 @@
 import { Host, List } from "@expo/ui/swift-ui";
-import {
-  groupBySpecializationDigits,
-  GroupSection,
-  StudentGroup,
-} from "@entities/groups";
+import { groupBySpecializationDigits, GroupSection, useGroups, } from "@entities/groups";
 import { refreshable } from "@expo/ui/swift-ui/modifiers";
-import useSWR from "swr";
-import { fetcher } from "@fetchApi";
 import { CircularProgress } from "@expo/ui/jetpack-compose";
-
-export const data: StudentGroup[] = [
-  {
-    id: "210241",
-    name: "210241",
-    facultyId: 20017,
-    facultyAbbrev: "ФКП",
-    specialityAbbrev: "ПиППУЭС",
-    course: 4,
-  },
-  {
-    id: "222441",
-    name: "222441",
-    facultyId: 20005,
-    facultyAbbrev: "ФИТУ",
-    specialityAbbrev: "ИТиУвТС",
-    course: 4,
-  },
-  {
-    id: "250541",
-    name: "250541",
-    facultyId: 20026,
-    facultyAbbrev: "ФКСиС",
-    specialityAbbrev: "ВМСиС",
-    course: 4,
-  },
-  {
-    id: "263041",
-    name: "263041",
-    facultyId: 20040,
-    facultyAbbrev: "ФИБ",
-    specialityAbbrev: "ИКТ(СИ)",
-    course: 4,
-  },
-];
+import { Stack } from "expo-router";
+import { useDeferredValue, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const GroupsScreen = () => {
-  const { data, isLoading, mutate } = useSWR<StudentGroup[]>(
-    "https://iis.bsuir.by/api/v1/student-groups",
-    fetcher
-  );
+  const [filter, setFilter] = useState("");
+  const deferredFilter = useDeferredValue(filter);
+  const { t } = useTranslation();
+  const { groups, refetch, isLoading } = useGroups();
 
   const handleRefresh = async () => {
-    await mutate();
+    await refetch();
   };
 
-  const groupedStudentGroups = groupBySpecializationDigits(data ?? []);
+  const filteredAndGroupedGroups = useMemo(() => {
+    if (!groups) return {};
+
+    if (!deferredFilter) {
+      return groupBySpecializationDigits(groups);
+    }
+
+    const filteredData = groups.filter((group) =>
+      group.name.toLowerCase().includes(deferredFilter)
+    );
+
+    return groupBySpecializationDigits(filteredData);
+  }, [groups, deferredFilter]);
 
   return (
-    <Host style={{ flex: 1 }}>
-      {!isLoading ? (
-        <List modifiers={[refreshable(handleRefresh)]}>
-          {Object.entries(groupedStudentGroups).map(([prefix, groups]) => (
-            <GroupSection key={prefix} title={prefix} items={groups} />
-          ))}
-        </List>
-      ) : (
-        <CircularProgress />
-      )}
-    </Host>
+    <>
+      <Stack.Screen
+        options={{
+          headerSearchBarOptions: {
+            onChangeText: (e) => setFilter(e.nativeEvent.text),
+            placeholder: t("groupsScreen.searchPlaceholder"),
+          },
+        }}
+      />
+      <Host style={{ flex: 1 }}>
+        {!isLoading ? (
+          <List modifiers={[refreshable(handleRefresh)]}>
+            {Object.entries(filteredAndGroupedGroups).map(
+              ([prefix, groups]) => (
+                <GroupSection key={prefix} title={prefix} items={groups} />
+              )
+            )}
+          </List>
+        ) : (
+          <CircularProgress />
+        )}
+      </Host>
+    </>
   );
 };
 

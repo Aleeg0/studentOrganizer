@@ -1,4 +1,4 @@
-import { Day, DayName, Schedules } from "@entities/lessons";
+import { Day, DayName, Schedules } from "./types";
 
 const DAY_ORDER: DayName[] = [
   Day.MONDAY,

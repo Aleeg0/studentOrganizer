@@ -28,7 +28,7 @@ export const useColorScheme = () => {
   };
 
   return [
-    (colorScheme ?? systemColorScheme) as ColorSchemeName,
+    (colorScheme ?? systemColorScheme ?? "dark") as ColorSchemeName,
     setTheme,
   ] as const;
 };

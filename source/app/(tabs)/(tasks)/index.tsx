@@ -1,3 +1,3 @@
-import { TasksPage } from "@screens";
+import { TasksScreen } from "@screens";
 
-export default TasksPage;
+export default TasksScreen;

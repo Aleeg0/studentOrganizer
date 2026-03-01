@@ -1,4 +1,4 @@
-import { Lesson, LessonType } from "@entities/lessons";
+import { Lesson, LessonType } from "../../model/types";
 
 export const getColorByLessonType = (type: LessonType) => {
   switch (type) {

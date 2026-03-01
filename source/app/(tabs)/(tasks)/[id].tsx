@@ -1,7 +1,3 @@
-import { View } from "react-native";
+import { TaskScreen } from "@screens";
 
-const Task = () => {
-  return <View />;
-};
-
-export default Task;
+export default TaskScreen;
