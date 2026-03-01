@@ -1,7 +1,35 @@
 {
   "tabs": {
-    "tracker": "Задачи",
+    "tasks": "Задачи",
     "schedule": "Расписание",
     "settings": "Настройки"
+  },
+  "groupsScreen": {
+    "navTitle": "Все группы",
+    "courseTitle": "Курс"
+  },
+  "scheduleScreen": {
+    "menu": {
+      "firstSubgroup": "1 подгруппа",
+      "secondSubgroup": "2 подгруппа",
+      "allSubgroups": "все подгруппы"
+    }
+  },
+  "settingsScreen": {
+    "appearanceTitle": "Внешний вид",
+    "themeToggleCaption": "Тёмный режим"
+  },
+  "languagePicker": {
+    "title": "Язык",
+    "english": "Английский",
+    "russian": "Русский"
+  },
+  "days": {
+    "monday": "Понедельник",
+    "tuesday": "Вторник",
+    "wednesday": "Среда",
+    "thursday": "Четверг",
+    "friday": "Пятница",
+    "saturday": "Суббота"
   }
 }

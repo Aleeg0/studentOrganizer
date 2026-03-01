@@ -1,7 +1,35 @@
 {
   "tabs": {
-    "tracker": "Tracker",
-    "schedule": "Scheduler",
+    "tasks": "Tasks",
+    "schedule": "Schedule",
     "settings": "Settings"
+  },
+  "groupsScreen": {
+    "navTitle": "All Groups",
+    "courseTitle": "Course"
+  },
+  "scheduleScreen": {
+    "menu": {
+      "firstSubgroup": "1st subgroup",
+      "secondSubgroup": "2nd subgroup",
+      "allSubgroups": "all subgroups"
+    }
+  },
+  "settingsScreen": {
+    "appearanceTitle": "Appearance",
+    "themeToggleCaption": "Dark mode"
+  },
+  "languagePicker": {
+    "title": "Language",
+    "english": "English",
+    "russian": "Russian"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
   }
 }

@@ -1,24 +1,18 @@
 import { LanguageDetectorModule } from "i18next";
-import { lcStorage } from "@storages";
-import { getLocales } from "expo-localization";
+import { createMMKV } from "react-native-mmkv";
+
+const lcStorage = createMMKV({ id: "lcStorage" });
+const LANGUAGE_KEY = "language";
 
 export const languageDetector: LanguageDetectorModule = {
   type: "languageDetector",
   init: () => {},
 
   detect: () => {
-    try {
-      return lcStorage.get() ?? getLocales()[0]?.languageCode ?? "en";
-    } catch (error) {
-      console.log("Error reading language", error);
-    }
+    return lcStorage.getString(LANGUAGE_KEY) ?? "en";
   },
 
   cacheUserLanguage: (language: string) => {
-    try {
-      lcStorage.set(language);
-    } catch (error) {
-      console.log("Error saving language", error);
-    }
+    lcStorage.set(LANGUAGE_KEY, language);
   },
 };

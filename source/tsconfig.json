@@ -8,17 +8,20 @@
       "@/*": [
         "./*"
       ],
-      "@pages": [
-        "./pages"
+      "@screens": [
+        "./screens"
       ],
-      "@entities": [
-        "./entities"
+      "@entities/*": [
+        "./entities/*"
       ],
       "@lc": [
         "./shared/lc"
       ],
       "@ui": [
         "./shared/ui"
+      ],
+      "@fetchApi": [
+        "./shared/fetchApi"
       ],
       "@storages": [
         "./shared/storages"
