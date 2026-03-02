@@ -17,7 +17,9 @@
       "firstSubgroup": "1 подгруппа",
       "secondSubgroup": "2 подгруппа",
       "allSubgroups": "все подгруппы"
-    }
+    },
+    "emptyTitle": "Похоже занятий больше нет",
+    "emptyDescription": "Все свободны!"
   },
   "settingsScreen": {
     "appearanceTitle": "Внешний вид",
@@ -47,5 +49,9 @@
       "title": "Удаление задачи",
       "description": "Вы уверены, что хотите удалить данную задачу?"
     }
+  },
+  "tasksScreen": {
+    "emptyTitle": "Список пуст",
+    "emptyDescription": "Создайте первую задачу, чтобы начать"
   }
 }

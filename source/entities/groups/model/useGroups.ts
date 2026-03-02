@@ -4,8 +4,8 @@ import { fetcher } from "@fetchApi";
 
 const fetchGroups = async (url: string) => {
   const data = await fetcher<StudentGroup[]>(url);
-  console.log("initData", data);
-  const mappedData = data.map(
+
+  return data.map(
     (group) =>
       ({
         id: group.id,
@@ -16,8 +16,6 @@ const fetchGroups = async (url: string) => {
         facultyId: group.facultyId,
       }) satisfies StudentGroup
   );
-  console.log("filtered Data", mappedData);
-  return mappedData;
 };
 
 export const useGroups = () => {

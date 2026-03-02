@@ -1,1 +1,1 @@
-export { default as MenuIcon, type MenuIconProps } from "./menuIcon/menuIcon";
+export { default as MessageBlock } from "./messageBlock/messageBlock.ios";

@@ -4,7 +4,7 @@ export type StudentGroup = {
   facultyId: number;
   facultyAbbrev: string;
   specialityAbbrev: string;
-  course: number;
+  course: number | null;
 };
 
 export type GroupedStudentGroups = Record<string, StudentGroup[]>;

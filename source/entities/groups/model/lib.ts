@@ -15,7 +15,7 @@ export const getBeautifulDescription = ({
   facultyAbbrev,
   specialityAbbrev,
 }: GetBeautifulDescriptionParams) => {
-  return `${facultyAbbrev} ${MIDDLE_DOT} ${specialityAbbrev} ${MIDDLE_DOT} ${courseTitle} ${course}`;
+  return `${facultyAbbrev} ${MIDDLE_DOT} ${specialityAbbrev} ${MIDDLE_DOT} ${courseTitle} ${course ?? ""}`;
 };
 
 export const groupBySpecializationDigits = (groups: StudentGroup[]) => {

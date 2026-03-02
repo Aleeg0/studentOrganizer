@@ -17,7 +17,14 @@ export default function RootLayout() {
   }, [theme]);
 
   return (
-    <SWRConfig>
+    <SWRConfig
+      value={{
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        errorRetryCount: 1,
+        errorRetryInterval: 2000,
+      }}
+    >
       <ThemeProvider value={theme === "dark" ? DarkTheme : LightTheme}>
         <SafeAreaProvider>
           <Stack>
