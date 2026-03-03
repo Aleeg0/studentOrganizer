@@ -1,19 +1,21 @@
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import EditButton from "./ui/editButton";
-import { Host, List, Section } from "@expo/ui/swift-ui";
 import { useEffect, useMemo, useState } from "react";
-import BaseInfoSection from "@/screens/tasksScreens/createTaskScreen/ui/baseInfoSection";
-import DeadlineSection from "@/screens/tasksScreens/createTaskScreen/ui/deadlineSection";
 import { useTranslation } from "react-i18next";
-import DeleteButton from "@/screens/tasksScreens/taskScreen/ui/deleteButton";
-import { useTasks } from "@entities/tasks";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Host, List, Section } from "@expo/ui/swift-ui";
+import { Task, useTaskNotification, useTasks } from "@entities/tasks";
+import BaseInfoSection from "../ui/baseInfoSection";
+import { DeadlineSection } from "../ui/deadlineSection";
+import EditButton from "./ui/editButton";
+import DeleteButton from "./ui/deleteButton";
+import { getBeautifulTime } from "@/screens/tasksScreens/createTaskScreen/ui/lib";
 
 export default function TaskScreen() {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { updateTask, tasks, deleteTask } = useTasks();
+  const { cancelTaskReminder, scheduleTaskReminder } = useTaskNotification();
 
   const task = useMemo(
     () => tasks!.find((task) => task.id === id),
@@ -22,9 +24,13 @@ export default function TaskScreen() {
 
   const [name, setName] = useState(task?.name ?? "");
   const [description, setDescription] = useState(task?.description ?? "");
-  const [deadline, setDeadline] = useState<Date | null>(
-    task?.deadline ? new Date(task.deadline) : null
+  const [deadlineDate, setDeadlineDate] = useState<Date | null>(
+    task?.deadlineDate ? new Date(task.deadlineDate) : null
   );
+  const [deadlineTime, setDeadlineTime] = useState<Date | null>(
+    task?.deadlineTime ? new Date(`1970-01-01T${task.deadlineTime}:00`) : null
+  );
+  const [reminder, setReminder] = useState(task?.reminder ?? 0);
 
   useEffect(() => {
     if (!task) {
@@ -38,12 +44,45 @@ export default function TaskScreen() {
 
   const handleEditPress = async () => {
     if (isEditing) {
-      await updateTask({
+      const updatedTask = {
         id,
         name,
         description,
-        deadline: deadline?.toString() ?? null,
-      });
+        deadlineDate: deadlineDate?.toDateString() ?? null,
+        deadlineTime: deadlineTime
+          ? getBeautifulTime(deadlineTime, i18n.language)
+          : null,
+        reminder: reminder,
+      } as Task;
+
+      const notificationId = task?.notificationId;
+
+      if (notificationId) {
+        await cancelTaskReminder(notificationId);
+        updatedTask.notificationId = null;
+      }
+
+      if (reminder) {
+        const newNotifId = await scheduleTaskReminder(
+          name,
+          new Date(
+            deadlineDate!.getFullYear(),
+            deadlineDate!.getMonth(),
+            deadlineDate!.getDate(),
+            deadlineTime!.getHours(),
+            deadlineTime!.getMinutes()
+          ),
+          reminder
+        );
+
+        if (newNotifId) {
+          updatedTask.notificationId = newNotifId;
+        } else {
+          alert("Уведомление не создано (возможно время уже прошло)");
+        }
+      }
+
+      await updateTask(updatedTask);
     }
     setIsEditing(!isEditing);
   };
@@ -77,8 +116,12 @@ export default function TaskScreen() {
             isReadOnly={!isEditing}
           />
           <DeadlineSection
-            date={deadline}
-            onSelectDate={setDeadline}
+            date={deadlineDate}
+            setDate={setDeadlineDate}
+            time={deadlineTime}
+            setTime={setDeadlineTime}
+            reminder={reminder}
+            setReminder={setReminder}
             isReadOnly={!isEditing}
           />
           <Section>

@@ -12,10 +12,10 @@ export const getBeautifulDate = (
   const dateStr = date.toDateString();
 
   if (dateStr === today.toDateString()) {
-    return t("createTaskScreen.dateToday");
+    return t("createTaskScreen.deadline.dateToday");
   }
   if (dateStr === tomorrow.toDateString()) {
-    return t("createTaskScreen.dateTomorrow");
+    return t("createTaskScreen.deadline.dateTomorrow");
   }
 
   return date.toLocaleDateString(locale, {
@@ -23,5 +23,13 @@ export const getBeautifulDate = (
     day: "numeric",
     month: "long",
     year: "numeric",
+  });
+};
+
+export const getBeautifulTime = (time: Date, locale: string) => {
+  return time.toLocaleTimeString(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
   });
 };

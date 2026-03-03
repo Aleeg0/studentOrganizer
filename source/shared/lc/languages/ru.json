@@ -36,10 +36,15 @@
       "namePlaceholder": "Новая задача",
       "descriptionPlaceholder": "Описание"
     },
-    "deadlineTitle": "Дедлайн",
-    "dataTitle": "Дата",
-    "dateToday": "Сегодня",
-    "dateTomorrow": "Завтра"
+    "deadline": {
+      "sectionTitle": "Дедлайн и Уведомления",
+      "dataTitle": "Дата",
+      "dateToday": "Сегодня",
+      "dateTomorrow": "Завтра",
+      "timeTitle": "Время",
+      "reminderTitle": "Уведомить",
+      "reminderPickerTitle": "Напомнить"
+    }
   },
   "taskScreen": {
     "deleteBtnCaption": "Удалить",
@@ -53,5 +58,9 @@
   "tasksScreen": {
     "emptyTitle": "Список пуст",
     "emptyDescription": "Создайте первую задачу, чтобы начать"
+  },
+  "notifications": {
+    "title": "Напоминание о задаче",
+    "description": "Скоро дедлайн по задаче: {{title}}"
   }
 }

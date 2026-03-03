@@ -10,15 +10,15 @@ const TabsLayout = () => {
 
   return (
     <NativeTabs>
+      <NativeTabs.Trigger name="(tasks)">
+        <NativeTabs.Trigger.Label>{t("tabs.tasks")}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="checklist" md="playlist_add_check" />
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="scheduler">
         <NativeTabs.Trigger.Label>
           {t("tabs.schedule")}
         </NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="calendar.and.person" md="event" />
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="(tasks)">
-        <NativeTabs.Trigger.Label>{t("tabs.tasks")}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="checklist" md="playlist_add_check" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
         <NativeTabs.Trigger.Label>

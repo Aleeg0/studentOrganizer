@@ -2,25 +2,56 @@ import { Stack, useRouter } from "expo-router";
 import { Host, List } from "@expo/ui/swift-ui";
 import CloseButton from "./ui/headerButtons/closeButton";
 import AddTaskButton from "./ui/headerButtons/addTaskButton";
-import DeadlineSection from "./ui/deadlineSection";
-import BaseInfoSection from "./ui/baseInfoSection";
+import { DeadlineSection } from "../ui/deadlineSection";
+import BaseInfoSection from "../ui/baseInfoSection";
 import { useState } from "react";
-import { useTasks } from "@entities/tasks";
+import { Task, useTaskNotification, useTasks } from "@entities/tasks";
+import { getBeautifulTime } from "@/screens/tasksScreens/createTaskScreen/ui/lib";
+import { useTranslation } from "react-i18next";
 
 export default function CreateTaskScreen() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState<Date | null>(null);
+  const [deadlineDate, setDeadlineDate] = useState<Date | null>(null);
+  const [deadlineTime, setDeadlineTime] = useState<Date | null>(null);
+  const [reminder, setReminder] = useState(0);
   const router = useRouter();
-  const { addTask } = useTasks();
+  const { addTask, isValidating } = useTasks();
+  const { scheduleTaskReminder } = useTaskNotification();
+  const { i18n } = useTranslation();
 
   const handlePress = async () => {
-    router.dismiss();
-    await addTask({
+    const newTask = {
       name,
       description,
-      deadline: deadline?.toString() ?? null,
-    });
+      deadlineDate: deadlineDate?.toDateString() ?? null,
+      deadlineTime: deadlineTime
+        ? getBeautifulTime(deadlineTime, i18n.language)
+        : null,
+      reminder: reminder,
+    } as Omit<Task, "id">;
+
+    if (reminder) {
+      const newNotifId = await scheduleTaskReminder(
+        name,
+        new Date(
+          deadlineDate!.getFullYear(),
+          deadlineDate!.getMonth(),
+          deadlineDate!.getDate(),
+          deadlineTime!.getHours(),
+          deadlineTime!.getMinutes()
+        ),
+        reminder
+      );
+
+      if (newNotifId) {
+        newTask.notificationId = newNotifId;
+        await addTask(newTask);
+        router.dismiss();
+      } else {
+        alert("Уведомление не создано (возможно время уже прошло)");
+      }
+    }
   };
 
   return (
@@ -28,7 +59,9 @@ export default function CreateTaskScreen() {
       <Stack.Screen
         options={{
           headerLeft: CloseButton,
-          headerRight: () => <AddTaskButton onPress={handlePress} />,
+          headerRight: () => (
+            <AddTaskButton onPress={handlePress} disabled={isValidating} />
+          ),
         }}
       />
       <Host style={{ flex: 1 }}>
@@ -39,7 +72,14 @@ export default function CreateTaskScreen() {
             description={description}
             setDescription={setDescription}
           />
-          <DeadlineSection date={deadline} onSelectDate={setDeadline} />
+          <DeadlineSection
+            date={deadlineDate}
+            setDate={setDeadlineDate}
+            time={deadlineTime}
+            setTime={setDeadlineTime}
+            reminder={reminder}
+            setReminder={setReminder}
+          />
         </List>
       </Host>
     </>

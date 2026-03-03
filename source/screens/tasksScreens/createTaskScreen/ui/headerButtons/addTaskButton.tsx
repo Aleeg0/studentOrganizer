@@ -1,12 +1,17 @@
 import { Button, ButtonProps, Host } from "@expo/ui/swift-ui";
-import { labelStyle, tint } from "@expo/ui/swift-ui/modifiers";
+import {
+  disabled as disabledModifier,
+  labelStyle,
+  tint,
+} from "@expo/ui/swift-ui/modifiers";
 import { PlatformColor } from "react-native";
 
 interface Props {
   onPress: ButtonProps["onPress"];
+  disabled?: boolean;
 }
 
-export default function AddTaskButton({ onPress }: Props) {
+export default function AddTaskButton({ onPress, disabled = false }: Props) {
   return (
     <Host matchContents>
       <Button
@@ -15,6 +20,7 @@ export default function AddTaskButton({ onPress }: Props) {
         modifiers={[
           labelStyle("iconOnly"),
           tint(PlatformColor("systemMaterial")),
+          disabledModifier(disabled),
         ]}
         onPress={onPress}
       />

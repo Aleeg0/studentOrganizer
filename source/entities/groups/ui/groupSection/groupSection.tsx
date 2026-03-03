@@ -1,4 +1,4 @@
-import { Section, SectionProps } from "@expo/ui/swift-ui";
+import { List, Section, SectionProps } from "@expo/ui/swift-ui";
 import { useRouter } from "expo-router";
 import GroupSectionItem from "./groupSectionItem";
 import { StudentGroup } from "../../model/types";
@@ -20,17 +20,19 @@ export default function GroupSection({ title, items }: Props) {
 
   return (
     <Section title={title}>
-      {items.map((item) => (
-        <GroupSectionItem
-          key={item.name}
-          onPress={() => onPress(item.name)}
-          name={item.name}
-          description={getBeautifulDescription({
-            ...item,
-            courseTitle: t("groupsScreen.courseTitle"),
-          })}
-        />
-      ))}
+      <List.ForEach>
+        {items.map((item) => (
+          <GroupSectionItem
+            key={item.name}
+            onPress={() => onPress(item.name)}
+            name={item.name}
+            description={getBeautifulDescription({
+              ...item,
+              courseTitle: t("groupsScreen.courseTitle"),
+            })}
+          />
+        ))}
+      </List.ForEach>
     </Section>
   );
 }

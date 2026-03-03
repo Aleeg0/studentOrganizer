@@ -26,7 +26,7 @@ export default function TasksScreen() {
       <Host
         style={{
           flex: 1,
-          backgroundColor: PlatformColor("systemBackgroundColor"),
+          backgroundColor: PlatformColor("systemGroupedBackground"),
         }}
       >
         {showEmptyState ? (
