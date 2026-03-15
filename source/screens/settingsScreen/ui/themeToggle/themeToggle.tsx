@@ -1,5 +1,4 @@
 import {
-  Host,
   HStack,
   Image,
   Spacer,
@@ -19,24 +18,22 @@ export default function ThemeToggle() {
   };
 
   return (
-    <Host>
-      <HStack>
-        <HStack spacing={10}>
-          <Image
-            systemName="circle.righthalf.filled"
-            color="white"
-            size={18}
-            modifiers={[
-              frame({ width: 28, height: 28 }),
-              background("#00a6ff"),
-              clipShape("roundedRectangle"),
-            ]}
-          />
-          <Text>{t("settingsScreen.themeToggleCaption")}</Text>
-        </HStack>
-        <Spacer />
-        <Toggle isOn={theme === "dark"} onIsOnChange={handleIsOnChanger} />
+    <HStack>
+      <HStack spacing={10}>
+        <Image
+          systemName="circle.righthalf.filled"
+          color="white"
+          size={18}
+          modifiers={[
+            frame({ width: 28, height: 28 }),
+            background("#00a6ff"),
+            clipShape("roundedRectangle"),
+          ]}
+        />
+        <Text>{t("settingsScreen.themeToggleCaption")}</Text>
       </HStack>
-    </Host>
+      <Spacer />
+      <Toggle isOn={theme === "dark"} onIsOnChange={handleIsOnChanger} />
+    </HStack>
   );
 }

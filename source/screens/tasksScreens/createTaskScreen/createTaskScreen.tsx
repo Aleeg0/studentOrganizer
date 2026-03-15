@@ -1,13 +1,12 @@
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Host, List } from "@expo/ui/swift-ui";
-import CloseButton from "./ui/headerButtons/closeButton";
-import AddTaskButton from "./ui/headerButtons/addTaskButton";
 import { DeadlineSection } from "../ui/deadlineSection";
 import BaseInfoSection from "../ui/baseInfoSection";
 import { useState } from "react";
 import { Task, useTaskNotification, useTasks } from "@entities/tasks";
 import { getBeautifulTime } from "@/screens/tasksScreens/createTaskScreen/ui/lib";
 import { useTranslation } from "react-i18next";
+import CreateTaskScreenOptions from "@/screens/tasksScreens/createTaskScreen/createTaskScreen.options";
 
 export default function CreateTaskScreen() {
   const [name, setName] = useState("");
@@ -20,11 +19,11 @@ export default function CreateTaskScreen() {
   const { scheduleTaskReminder } = useTaskNotification();
   const { i18n } = useTranslation();
 
-  const handlePress = async () => {
+  const handleCreatePress = async () => {
     const newTask = {
       name,
       description,
-      deadlineDate: deadlineDate?.toDateString() ?? null,
+      deadlineDate: deadlineDate ?? null,
       deadlineTime: deadlineTime
         ? getBeautifulTime(deadlineTime, i18n.language)
         : null,
@@ -46,23 +45,26 @@ export default function CreateTaskScreen() {
 
       if (newNotifId) {
         newTask.notificationId = newNotifId;
-        await addTask(newTask);
-        router.dismiss();
       } else {
         alert("Уведомление не создано (возможно время уже прошло)");
+        return;
       }
     }
+
+    await addTask(newTask);
+    router.dismiss();
+  };
+
+  const handleCancelPress = () => {
+    router.dismiss();
   };
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          headerLeft: CloseButton,
-          headerRight: () => (
-            <AddTaskButton onPress={handlePress} disabled={isValidating} />
-          ),
-        }}
+      <CreateTaskScreenOptions
+        onCancelPress={handleCancelPress}
+        onCreatePress={handleCreatePress}
+        createBtnDisable={isValidating}
       />
       <Host style={{ flex: 1 }}>
         <List>

@@ -5,33 +5,16 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@screens": [
-        "./screens"
-      ],
-      "@entities/*": [
-        "./entities/*"
-      ],
-      "@lc": [
-        "./shared/lc"
-      ],
-      "@ui": [
-        "./shared/ui"
-      ],
-      "@fetchApi": [
-        "./shared/fetchApi"
-      ],
-      "@storages": [
-        "./shared/storages"
-      ],
+      "@/*": ["./*"],
+      "@screens": ["./screens"],
+      "@entities/*": ["./entities/*"],
+      "@lc": ["./shared/lc"],
+      "@ui": ["./shared/ui"],
+      "@fetchApi": ["./shared/fetchApi"],
+      "@storages": ["./shared/storages"],
+      "@contexts": ["./shared/contexts"],
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

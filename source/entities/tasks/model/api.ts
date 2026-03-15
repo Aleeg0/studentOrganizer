@@ -4,18 +4,31 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  query,
   updateDoc,
+  where,
 } from "firebase/firestore";
-import { db } from "@/shared/firebase";
+import { auth, db } from "@/shared/firebase";
 import { Task } from "./types";
 
 export type NewTask = Omit<Task, "id">;
 
 const COLLECTION_NAME = "tasks";
 
+const getUid = () => {
+  const uid = auth.currentUser?.uid;
+  if (!uid) throw new Error("User is not authenticated");
+  return uid;
+};
+
 export const tasksApi = {
   fetchAll: async (): Promise<Task[]> => {
-    const querySnapshot = await getDocs(collection(db, COLLECTION_NAME));
+    const uid = getUid();
+
+    const querySnapshot = await getDocs(
+      query(collection(db, COLLECTION_NAME), where("userId", "==", uid))
+    );
+
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as NewTask),
@@ -23,8 +36,15 @@ export const tasksApi = {
   },
 
   create: async (task: NewTask): Promise<string> => {
-    const docRef = await addDoc(collection(db, COLLECTION_NAME), task);
-    return docRef.id; // Возвращаем ID созданного документа
+    const uid = getUid();
+
+    const taskWithUser = {
+      ...task,
+      userId: uid,
+    };
+
+    const docRef = await addDoc(collection(db, COLLECTION_NAME), taskWithUser);
+    return docRef.id;
   },
 
   update: async (task: Task): Promise<void> => {

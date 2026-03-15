@@ -1,11 +1,4 @@
-import {
-  Host,
-  HStack,
-  Image,
-  Picker,
-  PickerProps,
-  Text,
-} from "@expo/ui/swift-ui";
+import { HStack, Image, Picker, PickerProps, Text } from "@expo/ui/swift-ui";
 import {
   background,
   clipShape,
@@ -30,31 +23,29 @@ export default function LanguagePicker() {
   };
 
   return (
-    <Host>
-      <HStack spacing={10}>
-        <Image
-          systemName="globe"
-          color="white"
-          size={18}
-          modifiers={[
-            frame({ width: 28, height: 28 }),
-            background("#ff9100"),
-            clipShape("roundedRectangle"),
-          ]}
-        />
-        <Picker
-          label={t("languagePicker.title")}
-          selection={i18n.language}
-          onSelectionChange={handleSelectionChange}
-          modifiers={[pickerStyle("menu")]}
-        >
-          {languages.map((lang) => (
-            <Text key={lang.code} modifiers={[tag(lang.code)]}>
-              {lang.label}
-            </Text>
-          ))}
-        </Picker>
-      </HStack>
-    </Host>
+    <HStack spacing={10}>
+      <Image
+        systemName="globe"
+        color="white"
+        size={18}
+        modifiers={[
+          frame({ width: 28, height: 28 }),
+          background("#ff9100"),
+          clipShape("roundedRectangle"),
+        ]}
+      />
+      <Picker
+        label={t("languagePicker.title")}
+        selection={i18n.language}
+        onSelectionChange={handleSelectionChange}
+        modifiers={[pickerStyle("menu")]}
+      >
+        {languages.map((lang) => (
+          <Text key={lang.code} modifiers={[tag(lang.code)]}>
+            {lang.label}
+          </Text>
+        ))}
+      </Picker>
+    </HStack>
   );
 }

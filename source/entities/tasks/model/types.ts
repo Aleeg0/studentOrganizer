@@ -6,4 +6,5 @@ export type Task = {
   deadlineTime: string | null;
   reminder: number;
   notificationId: string | null;
+  userId: string;
 };

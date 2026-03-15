@@ -4,16 +4,13 @@ import {
   useColorScheme as useColorSchemeBase,
 } from "react-native";
 import { createMMKV, useMMKVString } from "react-native-mmkv";
+import { useEffect } from "react";
 
 const themeStorage = createMMKV({
   id: "themeStorage",
 });
 
 const COLOR_SCHEME_KEY = "color_scheme";
-
-Appearance.setColorScheme(
-  themeStorage.getString(COLOR_SCHEME_KEY) as ColorSchemeName
-);
 
 export const useColorScheme = () => {
   const systemColorScheme = useColorSchemeBase();
@@ -26,6 +23,12 @@ export const useColorScheme = () => {
     Appearance.setColorScheme(value);
     setColorScheme(value);
   };
+
+  useEffect(() => {
+    if (colorScheme) {
+      Appearance.setColorScheme(colorScheme as ColorSchemeName);
+    }
+  }, [colorScheme]);
 
   return [
     (colorScheme ?? systemColorScheme ?? "dark") as ColorSchemeName,

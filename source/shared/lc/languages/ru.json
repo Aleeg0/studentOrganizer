@@ -23,7 +23,15 @@
   },
   "settingsScreen": {
     "appearanceTitle": "Внешний вид",
-    "themeToggleCaption": "Тёмный режим"
+    "themeToggleCaption": "Тёмный режим",
+    "profileTitle": "Профиль",
+    "logout": {
+      "btnCaption": "Выйти",
+      "title": "Выйти из аккаунта?",
+      "description": "Чтобы снова получить доступ к своим задачам, потребуется войти в систему.",
+      "submitCaption": "Выйти",
+      "cancelCaption": "Отмена"
+    }
   },
   "languagePicker": {
     "title": "Язык",
@@ -62,5 +70,38 @@
   "notifications": {
     "title": "Напоминание о задаче",
     "description": "Скоро дедлайн по задаче: {{title}}"
+  },
+  "registrationScreen": {
+    "title": "Создать аккаунт",
+    "description": "Зарегистрируйтесь, чтобы начать",
+    "emailPlaceholder": "Почта",
+    "newPasswordPlaceholder": "Пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "registerBtnCaption": "Зарегистрироваться",
+    "dividerText": "или",
+    "googleBtnCaption": "Продолжить с Google",
+    "alreadyRegistered": "Уже есть аккаунт?",
+    "goLoginBtnCaption": "Войти"
+  },
+  "loginScreen": {
+    "title": "С возвращением!",
+    "description": "Войдите в свой аккаунт",
+    "emailPlaceholder": "Почта",
+    "passwordPlaceholder": "Пароль",
+    "registerBtnCaption": "Войти",
+    "dividerText": "или",
+    "googleBtnCaption": "Продолжить с Google",
+    "notRegistered": "Нет аккаунта?",
+    "goRegistrationBtnCaption": "Зарегистрироваться"
+  },
+  "authErrors": {
+    "emailAlreadyInUse": "Этот email уже зарегистрирован.",
+    "invalidateEmail": "Некорректный формат email.",
+    "weakPassword": "Пароль должен быть не менее 6 символов.",
+    "invalidateCredentials": "Неверный email или пароль.",
+    "networkRequestFailed": "Ошибка сети. Проверьте соединение.",
+    "unknownError": "Что-то пошло не так! Попробуйте позже",
+    "passwordsMissmatch": "Пароли не совпадают",
+    "googleError": "Похоже гугл вас подвел!"
   }
 }
