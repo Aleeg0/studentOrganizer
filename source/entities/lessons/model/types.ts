@@ -48,4 +48,5 @@ export type GroupSchedule = {
   startDate: string;
   endDate: string;
   schedules: Schedules | null;
+  calendarId: string;
 };

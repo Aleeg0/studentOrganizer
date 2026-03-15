@@ -3,15 +3,26 @@ import { fetcher } from "@fetchApi";
 import { Employee, GroupSchedule, Lesson, Schedules } from "@entities/lessons";
 import { useCallback } from "react";
 
-type ScheduleRes = GroupSchedule;
+type ScheduleRes = Omit<GroupSchedule, "calendarId"> & {
+  studentGroupDto: {
+    calendarId: string;
+  };
+};
 
 const fetchSchedule = async (url: string) => {
   const data = await fetcher<ScheduleRes>(url);
 
+  const filteredData: GroupSchedule = {
+    startDate: data.startDate,
+    endDate: data.endDate,
+    schedules: null,
+    calendarId: data.studentGroupDto.calendarId,
+  };
+
   const lessons = data.schedules;
 
   if (lessons) {
-    const filteredLessons = Object.entries(lessons).reduce<Schedules>(
+    filteredData.schedules = Object.entries(lessons).reduce<Schedules>(
       (acc, [dayName, dayLessons]) => {
         acc[dayName as keyof Schedules] = dayLessons.map(
           (lesson) =>
@@ -43,19 +54,9 @@ const fetchSchedule = async (url: string) => {
       },
       {} as Schedules
     );
-
-    return {
-      startDate: data.startDate,
-      endDate: data.endDate,
-      schedules: filteredLessons,
-    } satisfies ScheduleRes;
-  } else {
-    return {
-      startDate: data.startDate,
-      endDate: data.endDate,
-      schedules: null,
-    } satisfies ScheduleRes;
   }
+
+  return filteredData;
 };
 
 export const useSchedule = (name?: string) => {

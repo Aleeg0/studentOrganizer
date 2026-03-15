@@ -18,6 +18,7 @@
       "secondSubgroup": "2 подгруппа",
       "allSubgroups": "все подгруппы"
     },
+    "shareAlertError": "Не удалось поделиться календарем",
     "emptyTitle": "Похоже занятий больше нет",
     "emptyDescription": "Все свободны!"
   },
@@ -103,5 +104,8 @@
     "unknownError": "Что-то пошло не так! Попробуйте позже",
     "passwordsMissmatch": "Пароли не совпадают",
     "googleError": "Похоже гугл вас подвел!"
+  },
+  "common": {
+    "errorTitle": "Ошибка"
   }
 }
