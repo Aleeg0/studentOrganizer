@@ -18,12 +18,33 @@
       "secondSubgroup": "2nd subgroup",
       "allSubgroups": "all subgroups"
     },
-    "emptyTitle": "Looks like no more classes",
+    "shareAlertError": "Failed to share calendar",
+    "emptyTitle": "Looks like there are no more classes",
     "emptyDescription": "Everyone is free!"
   },
   "settingsScreen": {
     "appearanceTitle": "Appearance",
-    "themeToggleCaption": "Dark mode"
+    "themeToggleCaption": "Dark mode",
+    "profileTitle": "Profile",
+    "logout": {
+      "btnCaption": "Log out",
+      "title": "Log out of account?",
+      "description": "To regain access to your tasks, you will need to log in again.",
+      "submitCaption": "Log out",
+      "cancelCaption": "Cancel"
+    },
+    "profileInfo": {
+      "cameraBtnCaption": "Camera",
+      "libraryBtnCaption": "Gallery",
+      "removeBtnCaption": "Remove",
+      "cancelBtnCaption": "Cancel",
+      "chooseAlertTitle": "Profile Photo",
+      "chooseAlertMessage": "Choose an action:",
+      "grantedErrorTitle": "Permission required",
+      "libraryGrantedError": "Permission to access the gallery is required.",
+      "cameraGrantedError": "Permission to access the camera is required.",
+      "cameraUnhandledError": "Looks like the camera is currently unavailable"
+    }
   },
   "languagePicker": {
     "title": "Language",
@@ -32,8 +53,8 @@
   },
   "createTaskScreen": {
     "baseInfo": {
-      "title": "Basic Information",
-      "namePlaceholder": "New Task",
+      "title": "Basic information",
+      "namePlaceholder": "New task",
       "descriptionPlaceholder": "Description"
     },
     "deadline": {
@@ -51,7 +72,7 @@
     "deleteAlert": {
       "submitBtnCaption": "Confirm",
       "cancelBtnCaption": "Cancel",
-      "title": "Delete Task",
+      "title": "Delete task",
       "description": "Are you sure you want to delete this task?"
     }
   },
@@ -60,7 +81,44 @@
     "emptyDescription": "Create your first task to get started"
   },
   "notifications": {
-    "title": "Task Reminder",
-    "description": "Deadline is approaching for task: {{title}}"
+    "title": "Task reminder",
+    "description": "Deadline for task is coming soon: {{title}}"
+  },
+  "registrationScreen": {
+    "title": "Create account",
+    "description": "Sign up to get started",
+    "emailPlaceholder": "Email",
+    "newPasswordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "registerBtnCaption": "Sign up",
+    "dividerText": "or",
+    "googleBtnCaption": "Continue with Google",
+    "alreadyRegistered": "Already have an account?",
+    "goLoginBtnCaption": "Log in"
+  },
+  "loginScreen": {
+    "title": "Welcome back!",
+    "description": "Log in to your account",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "registerBtnCaption": "Log in",
+    "dividerText": "or",
+    "googleBtnCaption": "Continue with Google",
+    "notRegistered": "Don't have an account?",
+    "goRegistrationBtnCaption": "Sign up"
+  },
+  "authErrors": {
+    "emailAlreadyInUse": "This email is already registered.",
+    "invalidateEmail": "Invalid email format.",
+    "weakPassword": "Password must be at least 6 characters.",
+    "invalidateCredentials": "Invalid email or password.",
+    "networkRequestFailed": "Network error. Check your connection.",
+    "unknownError": "Something went wrong! Try again later",
+    "passwordsMissmatch": "Passwords do not match",
+    "googleError": "Looks like Google let you down!"
+  },
+  "common": {
+    "errorTitle": "Error",
+    "unhandledError": "Oops... Looks like something broke"
   }
 }

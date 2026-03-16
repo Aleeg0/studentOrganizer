@@ -32,6 +32,18 @@
       "description": "Чтобы снова получить доступ к своим задачам, потребуется войти в систему.",
       "submitCaption": "Выйти",
       "cancelCaption": "Отмена"
+    },
+    "profileInfo": {
+      "cameraBtnCaption": "Камера",
+      "libraryBtnCaption": "Галерея",
+      "removeBtnCaption": "Удалить",
+      "cancelBtnCaption": "Отмена",
+      "chooseAlertTitle": "Фото профиля",
+      "chooseAlertMessage": "Выберите действие:",
+      "grantedErrorTitle": "Требуется разрешение",
+      "libraryGrantedError": "Требуется разрешение на доступ к галереи.",
+      "cameraGrantedError": "Требуется разрешение на доступ к камере.",
+      "cameraUnhandledError": "Похоже камера сейчас недоступна"
     }
   },
   "languagePicker": {
@@ -106,6 +118,7 @@
     "googleError": "Похоже гугл вас подвел!"
   },
   "common": {
-    "errorTitle": "Ошибка"
+    "errorTitle": "Ошибка",
+    "unhandledError": "Упс... Похоже что-то сломалось"
   }
 }

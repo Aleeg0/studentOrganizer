@@ -16,14 +16,13 @@ export const useAuth = () => {
 };
 
 export type AuthActionContext = {
-  login: () => void;
-  logout: () => void;
+  updateProfileUrl: (photoURL: string | null) => Promise<void>;
 };
 
 export const AuthActionsContext = createContext<AuthActionContext | null>(null);
 
 export const useAuthActions = () => {
-  const authActionsContext = useContext(AuthContext);
+  const authActionsContext = useContext(AuthActionsContext);
   if (!authActionsContext) {
     throw new Error("useAuthActions must be used within AuthActionsContext");
   }

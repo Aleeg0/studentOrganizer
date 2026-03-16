@@ -52,6 +52,8 @@
       "expo-web-browser",
       "expo-localization",
       "expo-secure-store",
+      "expo-image-picker",
+      "expo-file-system",
       [
         "expo-notifications",
         {

@@ -1,6 +1,10 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { AuthContext } from "@/shared/contexts/authContext/auth.context";
-import { onAuthStateChanged } from "@firebase/auth";
+import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import {
+  AuthActionContext,
+  AuthActionsContext,
+  AuthContext,
+} from "@/shared/contexts/authContext/auth.context";
+import { onAuthStateChanged, updateProfile } from "firebase/auth";
 import { auth } from "@/shared/firebase";
 import { SplashScreen } from "expo-router";
 
@@ -25,5 +29,25 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     };
   }, []);
 
-  return <AuthContext value={{ user }}>{children}</AuthContext>;
+  const updateProfileUrl = useCallback<AuthActionContext["updateProfileUrl"]>(
+    async (photoURL) => {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        try {
+          await updateProfile(currentUser, {
+            photoURL: photoURL,
+          });
+          await currentUser?.reload();
+          setUser({ ...currentUser });
+        } catch {}
+      }
+    },
+    []
+  );
+
+  return (
+    <AuthActionsContext value={{ updateProfileUrl }}>
+      <AuthContext value={{ user }}>{children}</AuthContext>
+    </AuthActionsContext>
+  );
 }
